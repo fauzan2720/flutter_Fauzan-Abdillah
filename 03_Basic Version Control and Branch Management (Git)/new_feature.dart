@@ -1,1 +1,7 @@
-void main(List<String> args) {}
+void main(List<String> args) {
+  helloWorld();
+}
+
+void helloWorld() {
+  print("Hello, World!");
+}
