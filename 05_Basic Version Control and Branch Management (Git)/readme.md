@@ -51,3 +51,4 @@ Berikut adalah command line yang berhasil saya pelajari
 
 ![status commit](https://user-images.githubusercontent.com/74108522/219827488-a5ea42ed-3d2f-4b1c-b17d-eda1ac7ba4c5.jpg)
 ![complete pull request](https://user-images.githubusercontent.com/74108522/219827487-d65cd78d-0306-44f2-a33d-a8329e5c1010.jpg)
+![git graph](https://user-images.githubusercontent.com/74108522/219909473-ec2e3096-685c-443d-aa4e-0afb728a8cac.png)
