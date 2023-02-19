@@ -2,7 +2,7 @@
 
 ## Soal Prioritas 1
 
-Saya menyusun folder dengan ``(no-section)_(nama-section)``, yang didalamnya ada folder praktikum, screenshots, dan file readme.md.
+Saya menyusun folder dengan ``(no-section)_(nama-section)``, yang didalamnya ada folder ``praktikum``, ``screenshots``, dan file ``readme.md``.
 
 ![directory structure](https://user-images.githubusercontent.com/74108522/219910347-70084431-2ca5-4357-9cb8-3eccc2e59e09.png)
 
