@@ -39,23 +39,24 @@ void main() async {
 
   print("\n* Praktikum Prioritas 2");
   _createLine();
-  final result2 = _secondPriorityPracticum.listToMap();
+  final result2 = await _secondPriorityPracticum.listToMap();
   print("Hasil perubahan list ke map: $result2");
   _createLine();
-  final result3 = _secondPriorityPracticum.calculateAverage(_listNumber);
+  final result3 = await _secondPriorityPracticum.calculateAverage(_listNumber);
   print("Hasil rata-rata: $result3");
   _createLine();
-  final result4 = _secondPriorityPracticum.factorial(5);
+  final result4 = await _secondPriorityPracticum.factorial(5);
   print("Hasil faktorial dari 5 adalah $result4");
   _createLine();
 
   print("\n* Praktikum Eksplorasi");
   _createLine();
-  final result5 = _exploratoryPracticum.setUniqueList(_listData);
+  final result5 = await _exploratoryPracticum.setUniqueList(_listData);
   print("Hasil list yang di set unik: $result5");
   _createLine();
 
-  final result6 = _exploratoryPracticum.frequencyCounter(_programmingLanguage);
+  final result6 =
+      await _exploratoryPracticum.frequencyCounter(_programmingLanguage);
   print(
       "Frekuensi kemunculan bahasa pemrograman: ${result6.toString().replaceAll("{", "").replaceAll("}", "")}");
   _createLine();

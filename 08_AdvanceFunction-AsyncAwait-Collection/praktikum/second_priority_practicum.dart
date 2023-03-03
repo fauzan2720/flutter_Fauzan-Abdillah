@@ -1,5 +1,5 @@
 class SecondPriorityPracticum {
-  Map<int, String> listToMap() {
+  Future<Map<int, String>> listToMap() async {
     List<List<dynamic>> listData = [
       [1, "one"],
       [2, "two"],
@@ -8,6 +8,7 @@ class SecondPriorityPracticum {
       [5, "five"]
     ];
 
+    await Future.delayed(Duration(milliseconds: 1000));
     print("list data = $listData");
 
     Map<int, String> mapData = {};
@@ -23,7 +24,7 @@ class SecondPriorityPracticum {
     return mapData;
   }
 
-  int calculateAverage(List<int> data) {
+  Future<int> calculateAverage(List<int> data) async {
     int total = 0;
     double resultAverage;
     int resultRounding;
@@ -32,9 +33,13 @@ class SecondPriorityPracticum {
       total += element; // menjumlahkan setiap element
     }
 
+    await Future.delayed(Duration(milliseconds: 1000));
     print("Total = $total");
+
+    await Future.delayed(Duration(milliseconds: 200));
     print("Banyak data = ${data.length}");
 
+    await Future.delayed(Duration(milliseconds: 200));
     resultAverage = total / data.length; // RUMUS: total data / banyak data
     resultRounding = resultAverage.ceil(); // dibulatkan keatas
     print("Rata-rata = $total / ${data.length} = $resultAverage");
@@ -42,7 +47,7 @@ class SecondPriorityPracticum {
     return resultRounding;
   }
 
-  BigInt factorial(int n) {
+  Future<BigInt> factorial(int n) async {
     // menggunakan BigInt, karna hasil kemungkinan melebihi batas nilai integer
     BigInt result = BigInt.one;
     String log = '';
@@ -62,6 +67,7 @@ class SecondPriorityPracticum {
         }
       }
 
+      await Future.delayed(Duration(milliseconds: 1000));
       print(log);
 
       return result;

@@ -4,10 +4,10 @@ class FirstPriorityPracticum {
     print("pengali = $multiplier");
 
     List<int> result = [];
-    for (int i = 0; i < data.length; i++) {
+    for (int element in data) {
       int multiplied = await Future.delayed(Duration(milliseconds: 200), () {
-        int resMultiplication = data[i] * multiplier;
-        print("${data[i]} x $multiplier = $resMultiplication");
+        int resMultiplication = element * multiplier;
+        print("$element x $multiplier = $resMultiplication");
 
         return resMultiplication;
       });
