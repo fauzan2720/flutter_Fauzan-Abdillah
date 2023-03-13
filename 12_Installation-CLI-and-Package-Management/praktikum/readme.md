@@ -2,7 +2,11 @@
 
 ## Praktikum Prioritas 1
 
-1. ``flutter pub add path_provider``: instal paket/package path_provider ke proyek Flutter
+1. ``flutter packages get`` atau ``flutter pub get``: install paket/package yang telah ditambahkan pada file pubspec.yaml
+
+![install-package](https://user-images.githubusercontent.com/74108522/224692124-3507786a-65fb-4363-8e6a-eb7c817d2caa.png)
+
+``flutter pub add path_provider``: menambahkan dan install paket/package path_provider ke proyek Flutter
 
 ![add-package](https://user-images.githubusercontent.com/74108522/224540565-1442d636-3751-42be-9e41-c0465f2df16e.png)
 

@@ -2,7 +2,9 @@
 
 ``flutter create --org com.<package_name> <project_name>``: membuat proyek Flutter sekaligus mengatur nama package pada proyek
 
-``flutter pub add <nama_paket>``: instal paket/package pada proyek Flutter
+``flutter packages get`` atau ``flutter pub get``: install paket/package yang telah ditambahkan pada file pubspec.yaml
+
+``flutter pub add <nama_paket>``: menambahkan dan install paket/package pada proyek Flutter
 
 ``flutter pub remove <nama_paket>``: hapus paket/package pada proyek Flutter
 
