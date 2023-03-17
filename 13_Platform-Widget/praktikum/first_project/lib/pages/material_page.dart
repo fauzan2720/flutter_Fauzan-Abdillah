@@ -32,8 +32,12 @@ class MyMaterialPage extends StatelessWidget {
           return Card(
             child: ListTile(
               leading: CircleAvatar(
-                backgroundImage: NetworkImage(
-                  'https://ui-avatars.com/api/?background=03c03c&name=${dataModels[index].name}',
+                backgroundColor: Colors.greenAccent,
+                child: Text(
+                  dataModels[index].name[0],
+                  style: const TextStyle(
+                    color: Colors.black,
+                  ),
                 ),
               ),
               title: Text(dataModels[index].name),

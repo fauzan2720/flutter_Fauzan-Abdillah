@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 
 // NOTE: buka salah satu tag comment dari 3 fungsi main dibawah:
 
-// void main() => runApp(const MyMaterialApp());
+void main() => runApp(const MyMaterialApp());
 // void main() => runApp(const MyCupertinoApp());
-void main() => runApp(const MyFlutterApp());
+// void main() => runApp(const MyFlutterApp());
 
 class MyMaterialApp extends StatelessWidget {
   const MyMaterialApp({super.key});
