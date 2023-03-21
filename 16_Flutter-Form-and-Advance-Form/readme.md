@@ -10,4 +10,4 @@ Form Checkbox: Form checkbox dapat dibuat menggunakan widget Checkbox. Widget in
 
 Form Dropdown: Form dropdown dapat dibuat menggunakan widget DropdownButton atau DropdownButtonFormField. Widget ini memungkinkan pengguna untuk memilih satu opsi dari beberapa opsi yang tersedia dalam daftar drop-down.
 
-Form Button: Form button dapat dibuat menggunakan widget RaisedButton, FlatButton, atau OutlineButton. Widget ini memungkinkan pengguna untuk memicu suatu tindakan ketika tombol diklik, seperti mengirimkan formulir atau membatalkan tindakan.
+Form Button: Form button dapat dibuat menggunakan widget ElevatedButton, TextButton, OutlinedButton, IconButton, InkWell, atau GestureDetector. Widget ini memungkinkan pengguna untuk memicu suatu tindakan ketika tombol diklik, seperti mengirimkan formulir atau membatalkan tindakan.

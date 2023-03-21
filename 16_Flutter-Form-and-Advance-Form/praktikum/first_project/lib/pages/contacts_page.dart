@@ -1,11 +1,9 @@
 import 'package:first_project/core/colors.dart';
-import 'package:first_project/core/dialogs/show_success.dart';
 import 'package:first_project/core/widgets/form_button.dart';
 import 'package:first_project/core/widgets/form_input.dart';
 import 'package:first_project/model/contact_model.dart';
-import 'package:first_project/model/dummy.dart';
+import 'package:first_project/pages/contacts_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 class ContactsPage extends StatefulWidget {
   static const routeName = 'contacts_page';
@@ -17,84 +15,31 @@ class ContactsPage extends StatefulWidget {
 }
 
 class _ContactsPageState extends State<ContactsPage> {
-  final Dummy dummy = Dummy();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final GlobalKey<FormState> _formEditKey = GlobalKey<FormState>();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController nameEditController = TextEditingController();
-  final TextEditingController phoneEditController = TextEditingController();
+  late ContactsController controller;
 
-  String? nameValidation(String value) {
-    if (value.isEmpty) {
-      return 'Nama harus diisi';
-    }
-    List<String> words = value.trim().split(' ');
-    if (words.length < 2) {
-      return 'Nama harus terdiri dari minimal 2 kata';
-    }
-    for (String word in words) {
-      if (RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%0-9-]').hasMatch(word)) {
-        return 'Nama tidak boleh mengandung angka atau karakter khusus';
-      }
-      if (!RegExp(r'^[A-Z][a-z]*$').hasMatch(word)) {
-        return 'Setiap kata harus dimulai dengan huruf kapital';
-      }
-    }
-    return null;
-  }
-
-  String? phoneValidation(String value) {
-    if (value.isEmpty) {
-      return 'Nama harus diisi';
-    }
-    if (!RegExp(r'^\d+$').hasMatch(value)) {
-      return 'Nomor telepon harus terdiri dari angka saja';
-    }
-    if (value.length < 8 || value.length > 15) {
-      return 'Nomor telepon harus terdiri dari 8-15 digit';
-    }
-    if (!value.startsWith('0')) {
-      return 'Nomor telepon harus dimulai dengan angka 0';
-    }
-    return null;
-  }
-
-  void saveContact() {
-    final FormState form = _formKey.currentState!;
-    if (form.validate()) {
-      dummy.contacts.add(
-        ContactModel(
-          id: const Uuid().v4(),
-          name: nameController.text,
-          phoneNumber: phoneController.text,
-        ),
-      );
-      nameController.text = '';
-      phoneController.text = '';
-      showSuccess(context, message: "Berhasil ditambahkan");
-      setState(() {});
-    }
+  @override
+  void initState() {
+    controller = ContactsController(context, setState);
+    super.initState();
   }
 
   void showFormEditContact(ContactModel contact) async {
-    nameEditController.text = contact.name;
-    phoneEditController.text = contact.phoneNumber;
-
+    controller.nameEditController.text = contact.name;
+    controller.phoneEditController.text = contact.phoneNumber;
     await showDialog<void>(
       context: context,
       barrierDismissible: true,
       builder: (BuildContext context) {
         return Form(
-          key: _formEditKey,
+          key: controller.formEditKey,
           child: AlertDialog(
             title: const Text('Update Contact'),
             actions: <Widget>[
               FozFormInput(
                 label: 'Name',
                 hint: 'Insert Your Name',
-                controller: nameEditController,
-                validator: (value) => nameValidation(value!),
+                controller: controller.nameEditController,
+                validator: (value) => controller.nameValidation(value!),
               ),
               const SizedBox(
                 height: 16.0,
@@ -102,19 +47,21 @@ class _ContactsPageState extends State<ContactsPage> {
               FozFormInput(
                 label: 'Nomor',
                 hint: '+62 ....',
-                controller: phoneEditController,
+                controller: controller.phoneEditController,
                 keyboardType: TextInputType.phone,
-                validator: (value) => phoneValidation(value!),
+                validator: (value) => controller.phoneValidation(value!),
               ),
-              const SizedBox(
-                height: 16.0,
+              StatefulBuilder(
+                builder: (context, setState) => const SizedBox(
+                  height: 16.0,
+                ),
               ),
               Align(
                 alignment: Alignment.centerRight,
                 child: FozFormButton(
                   label: 'Update',
                   onPressed: () {
-                    updateContact(contact.id);
+                    controller.updateContact(contact.id);
                   },
                 ),
               ),
@@ -149,7 +96,7 @@ class _ContactsPageState extends State<ContactsPage> {
               ),
               onPressed: () {
                 Navigator.pop(context);
-                deleteContact(contact.id);
+                controller.deleteContact(contact.id);
               },
               child: const Text("Yes"),
             ),
@@ -157,29 +104,6 @@ class _ContactsPageState extends State<ContactsPage> {
         );
       },
     );
-  }
-
-  void updateContact(String id) {
-    final FormState form = _formEditKey.currentState!;
-    int index = dummy.contacts.indexWhere((element) {
-      return element.id == id;
-    });
-    if (form.validate()) {
-      Navigator.pop(context);
-      dummy.contacts[index] = ContactModel(
-        id: id,
-        name: nameEditController.text,
-        phoneNumber: phoneEditController.text,
-      );
-      showSuccess(context, message: "Berhasil diperbarui");
-      setState(() {});
-    }
-  }
-
-  void deleteContact(String id) {
-    dummy.contacts.removeWhere((element) => element.id == id);
-    showSuccess(context, message: "Berhasil dihapus");
-    setState(() {});
   }
 
   @override
@@ -223,7 +147,7 @@ class _ContactsPageState extends State<ContactsPage> {
             ),
           ),
           Form(
-            key: _formKey,
+            key: controller.formKey,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -231,8 +155,8 @@ class _ContactsPageState extends State<ContactsPage> {
                   FozFormInput(
                     label: 'Name',
                     hint: 'Insert Your Name',
-                    controller: nameController,
-                    validator: (value) => nameValidation(value!),
+                    controller: controller.nameController,
+                    validator: (value) => controller.nameValidation(value!),
                   ),
                   const SizedBox(
                     height: 16.0,
@@ -240,9 +164,9 @@ class _ContactsPageState extends State<ContactsPage> {
                   FozFormInput(
                     label: 'Nomor',
                     hint: '+62 ....',
-                    controller: phoneController,
+                    controller: controller.phoneController,
                     keyboardType: TextInputType.phone,
-                    validator: (value) => phoneValidation(value!),
+                    validator: (value) => controller.phoneValidation(value!),
                   ),
                   const SizedBox(
                     height: 16.0,
@@ -251,23 +175,28 @@ class _ContactsPageState extends State<ContactsPage> {
                     alignment: Alignment.centerRight,
                     child: FozFormButton(
                       label: 'Submit',
-                      onPressed: saveContact,
+                      onPressed: () => controller.saveContact(),
                     ),
                   ),
                   const SizedBox(
                     height: 50.0,
                   ),
-                  const Text(
-                    "List Contacts",
-                    style: TextStyle(
-                      fontSize: 24.0,
+                  if (controller.dummy.contacts.isNotEmpty)
+                    const Text(
+                      "List Contacts",
+                      style: TextStyle(
+                        fontSize: 24.0,
+                      ),
                     ),
-                  ),
                   const SizedBox(
                     height: 16.0,
                   ),
-                  Column(
-                    children: dummy.contacts.reversed.map((item) {
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: controller.dummy.contacts.length,
+                    itemBuilder: (context, index) {
+                      ContactModel item = controller.dummy.contacts[index];
                       return Card(
                         child: ListTile(
                           leading: CircleAvatar(
@@ -302,7 +231,7 @@ class _ContactsPageState extends State<ContactsPage> {
                           ),
                         ),
                       );
-                    }).toList(),
+                    },
                   ),
                   const SizedBox(
                     height: 40.0,

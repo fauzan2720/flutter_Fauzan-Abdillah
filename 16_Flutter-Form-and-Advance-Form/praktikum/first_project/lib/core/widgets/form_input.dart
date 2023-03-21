@@ -33,6 +33,7 @@ class FozFormInput extends StatelessWidget {
           color: AppColors.primaryColor,
         ),
         hintText: hint,
+        floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       onChanged: (value) {},
     );
