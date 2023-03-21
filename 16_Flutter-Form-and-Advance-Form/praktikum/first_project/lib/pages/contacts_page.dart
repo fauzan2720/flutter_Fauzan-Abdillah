@@ -4,6 +4,7 @@ import 'package:first_project/core/widgets/form_input.dart';
 import 'package:first_project/model/contact_model.dart';
 import 'package:first_project/pages/contacts_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:open_file/open_file.dart';
 
 class ContactsPage extends StatefulWidget {
   static const routeName = 'contacts_page';
@@ -88,7 +89,12 @@ class _ContactsPageState extends State<ContactsPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text("No"),
+              child: const Text(
+                "No",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -98,7 +104,12 @@ class _ContactsPageState extends State<ContactsPage> {
                 Navigator.pop(context);
                 controller.deleteContact(contact.id);
               },
-              child: const Text("Yes"),
+              child: const Text(
+                "Yes",
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             ),
           ],
         );
@@ -193,22 +204,42 @@ class _ContactsPageState extends State<ContactsPage> {
                   ),
                   ListView.builder(
                     shrinkWrap: true,
+                    reverse: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: controller.dummy.contacts.length,
                     itemBuilder: (context, index) {
                       ContactModel item = controller.dummy.contacts[index];
                       return Card(
+                        color: item.pickedColor ?? AppColors.cardColor,
                         child: ListTile(
-                          leading: CircleAvatar(
-                            backgroundColor: AppColors.backgroundColor,
-                            child: Text(
-                              item.name[0].toUpperCase(),
-                              style: TextStyle(
-                                color: AppColors.primaryColor,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
+                          leading: item.selectedFile == null
+                              ? CircleAvatar(
+                                  backgroundColor: AppColors.backgroundColor,
+                                  child: Text(
+                                    item.name[0].toUpperCase(),
+                                    style: TextStyle(
+                                      color: AppColors.primaryColor,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                )
+                              : GestureDetector(
+                                  onTap: () async {
+                                    if (item.selectedFile != null) {
+                                      await OpenFile.open(
+                                          item.selectedFile!.path);
+                                    }
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    child: Image.file(
+                                      item.selectedFile!,
+                                      fit: BoxFit.cover,
+                                      width: 40.0,
+                                      height: 40.0,
+                                    ),
+                                  ),
+                                ),
                           title: Text(item.name),
                           subtitle: Text(item.phoneNumber),
                           trailing: SizedBox(

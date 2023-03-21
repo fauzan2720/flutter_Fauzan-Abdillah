@@ -1,3 +1,4 @@
+import 'package:first_project/pages/form_picker_page.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:first_project/core/dialogs/show_success.dart';
@@ -56,17 +57,31 @@ class ContactsController {
   void saveContact() {
     final FormState form = formKey.currentState!;
     if (form.validate()) {
-      dummy.contacts.add(
-        ContactModel(
-          id: const Uuid().v4(),
-          name: nameController.text,
-          phoneNumber: phoneController.text,
+      showSuccess(context, message: "Berhasil ditambahkan");
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FormPickerPage(
+            onTap: (pickedDate, pickedTime, pickedColor, selectedFile) {
+              dummy.contacts.add(
+                ContactModel(
+                  id: const Uuid().v4(),
+                  name: nameController.text,
+                  phoneNumber: phoneController.text,
+                  pickedDate: pickedDate,
+                  pickedTime: pickedTime,
+                  pickedColor: pickedColor,
+                  selectedFile: selectedFile,
+                ),
+              );
+              nameController.text = '';
+              phoneController.text = '';
+              Navigator.pop(context);
+              setState(() {});
+            },
+          ),
         ),
       );
-      nameController.text = '';
-      phoneController.text = '';
-      showSuccess(context, message: "Berhasil ditambahkan");
-      setState(() {});
     }
   }
 
@@ -79,6 +94,10 @@ class ContactsController {
         id: id,
         name: nameEditController.text,
         phoneNumber: phoneEditController.text,
+        pickedDate: dummy.contacts[index].pickedDate,
+        pickedTime: dummy.contacts[index].pickedTime,
+        pickedColor: dummy.contacts[index].pickedColor,
+        selectedFile: dummy.contacts[index].selectedFile,
       );
       showSuccess(context, message: "Berhasil diperbarui");
       setState(() {});
