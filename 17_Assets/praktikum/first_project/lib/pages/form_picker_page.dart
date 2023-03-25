@@ -124,7 +124,7 @@ class _FormPickerPageState extends State<FormPickerPage> {
                                   TextButton(
                                     child: const Text('OK'),
                                     onPressed: () {
-                                      Navigator.of(context).pop();
+                                      Navigator.pop(context);
                                     },
                                   ),
                                 ],

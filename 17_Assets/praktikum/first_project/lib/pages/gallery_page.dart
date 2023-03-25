@@ -55,6 +55,14 @@ class GalleryPage extends StatelessWidget {
                                 child: const Text("Ya"),
                                 onPressed: () {
                                   Navigator.pop(context);
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => PreviewImagePage(
+                                  //       imageUrl: Dummy.gallery[index],
+                                  //     ),
+                                  //   ),
+                                  // );
                                   Navigator.pushNamed(
                                     context,
                                     PreviewImagePage.routeName,
@@ -86,6 +94,11 @@ class GalleryPage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        // onPressed: () => Navigator.pushReplacement(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => const ContactsPage(),
+        //     )),
         onPressed: () =>
             Navigator.pushReplacementNamed(context, ContactsPage.routeName),
         backgroundColor: AppColors.cardColor,

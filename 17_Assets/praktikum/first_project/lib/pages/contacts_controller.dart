@@ -58,6 +58,30 @@ class ContactsController {
     final FormState form = formKey.currentState!;
     if (form.validate()) {
       showSuccess(context, message: "Berhasil ditambahkan");
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //     builder: (context) => FormPickerPage(
+      //       onTap: (pickedDate, pickedTime, pickedColor, selectedFile) {
+      //         dummy.contacts.add(
+      //           ContactModel(
+      //             id: const Uuid().v4(),
+      //             name: nameController.text,
+      //             phoneNumber: phoneController.text,
+      //             pickedDate: pickedDate,
+      //             pickedTime: pickedTime,
+      //             pickedColor: pickedColor,
+      //             selectedFile: selectedFile,
+      //           ),
+      //         );
+      //         nameController.text = '';
+      //         phoneController.text = '';
+      //         Navigator.pop(context);
+      //         setState(() {});
+      //       },
+      //     ),
+      //   ),
+      // );
       Navigator.pushNamed(
         context,
         FormPickerPage.routeName,

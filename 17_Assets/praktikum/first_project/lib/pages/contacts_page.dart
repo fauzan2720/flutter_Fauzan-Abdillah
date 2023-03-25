@@ -275,6 +275,11 @@ class _ContactsPageState extends State<ContactsPage> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        // onPressed: () => Navigator.pushReplacement(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => const GalleryPage(),
+        //     )),
         onPressed: () =>
             Navigator.pushReplacementNamed(context, GalleryPage.routeName),
         backgroundColor: AppColors.cardColor,
