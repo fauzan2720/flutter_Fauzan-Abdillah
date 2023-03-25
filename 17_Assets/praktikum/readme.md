@@ -16,4 +16,4 @@ Output dibawah ini adalah hasil dari praktikum prioritas 1, prioritas 2, dan eks
 8. photo_view: ^0.14.0
 9. google_fonts: ^4.0.3
 
-## [Video Demonstrasi](https://github.com/fauzan2720/flutter_Fauzan-Abdillah/blob/main/17_Assets/screenshots/output.png)
+## [Video Demonstrasi](https://github.com/fauzan2720/flutter_Fauzan-Abdillah/blob/main/17_Assets/screenshots/demo.mp4)
