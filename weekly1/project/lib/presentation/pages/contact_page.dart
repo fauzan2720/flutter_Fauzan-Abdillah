@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project/core/extensions/double_ext.dart';
 import 'package:project/core/extensions/font_weight_ext.dart';
 import 'package:project/core/extensions/form_validator_ext.dart';
 import 'package:project/core/themes/images.dart';
@@ -19,23 +20,19 @@ class ContactPage extends StatelessWidget {
     final TextEditingController messageController = TextEditingController();
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Hotelifoz"),
+        leading: Image.asset(AppImages.logo),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
         child: Form(
           key: formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 50.0,
-              ),
-              Center(
-                child: Image.asset(
-                  AppImages.logo,
-                  width: 150.0,
-                ),
-              ),
-              const Divider(),
+              30.0.height,
               const Text(
                 "Contact Us",
                 style: TextStyle(
@@ -43,15 +40,11 @@ class ContactPage extends StatelessWidget {
                   fontWeight: FontWeightExt.medium,
                 ),
               ),
-              const SizedBox(
-                height: 20.0,
-              ),
+              20.0.height,
               const Text(
                 "Selamat datang di Hotelifoz, hotel bintang lima yang menyediakan pengalaman menginap yang luar biasa. Tim kami yang berpengalaman dan ramah siap membantu Anda selama masa menginap Anda. Terima kasih atas kepercayaan Anda kepada Hotelifoz!",
               ),
-              const SizedBox(
-                height: 20.0,
-              ),
+              20.0.height,
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -104,9 +97,7 @@ class ContactPage extends StatelessWidget {
                   return null;
                 },
               ),
-              const SizedBox(
-                height: 10.0,
-              ),
+              10.0.height,
               FozFormButton(
                 label: "Submit",
                 onPressed: () async {
@@ -140,9 +131,7 @@ class ContactPage extends StatelessWidget {
                   }
                 },
               ),
-              const SizedBox(
-                height: 30.0,
-              ),
+              30.0.height,
             ],
           ),
         ),
