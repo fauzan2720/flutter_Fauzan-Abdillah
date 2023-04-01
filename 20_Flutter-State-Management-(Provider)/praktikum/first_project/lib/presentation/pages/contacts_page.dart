@@ -19,8 +19,7 @@ class ContactsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ContactProvider contactProvider =
-        Provider.of<ContactProvider>(context, listen: false);
+    final ContactProvider contactProvider = context.read<ContactProvider>();
 
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final GlobalKey<FormState> formEditKey = GlobalKey<FormState>();
@@ -138,29 +137,21 @@ class ContactsPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40.0),
             child: Column(
-              children: const [
-                Icon(Icons.mobile_friendly),
-                SizedBox(
-                  height: 16.0,
-                ),
-                Text(
+              children: [
+                const Icon(Icons.mobile_friendly),
+                16.0.height,
+                const Text(
                   "Create New Contacts",
                   style: TextStyle(
                     fontSize: 24.0,
                   ),
                 ),
-                SizedBox(
-                  height: 16.0,
-                ),
-                Text(
+                16.0.height,
+                const Text(
                     "A dialog is a type of modal window that appears in front of app content to provide critical information, or prompt for a decision to be made."),
-                SizedBox(
-                  height: 16.0,
-                ),
-                Divider(),
-                SizedBox(
-                  height: 16.0,
-                ),
+                16.0.height,
+                const Divider(),
+                16.0.height,
               ],
             ),
           ),
@@ -202,10 +193,23 @@ class ContactsPage extends StatelessWidget {
                         if (form.validate()) {
                           nameController.clear();
                           phoneController.clear();
-                          Navigator.pushNamed(
+                          Navigator.push(
                             context,
-                            FormPickerPage.routeName,
-                            arguments: FormPickerPage(contact: query),
+                            PageRouteBuilder(
+                              transitionDuration:
+                                  const Duration(milliseconds: 500),
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      FormPickerPage(contact: query),
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
+                                final tween = Tween(begin: 0.0, end: 1.0);
+                                return ScaleTransition(
+                                  scale: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
+                            ),
                           );
                         }
                       },
@@ -233,11 +237,22 @@ class ContactsPage extends StatelessWidget {
                       itemBuilder: (context, index) {
                         ContactModel item = value.contacts[index];
                         return InkWell(
-                          onTap: () => Navigator.pushNamed(
+                          onTap: () => Navigator.push(
                             context,
-                            FormPickerPage.routeName,
-                            arguments: FormPickerPage(
-                              contact: item,
+                            PageRouteBuilder(
+                              transitionDuration:
+                                  const Duration(milliseconds: 500),
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      FormPickerPage(contact: item),
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
+                                final tween = Tween(begin: 0.0, end: 1.0);
+                                return ScaleTransition(
+                                  scale: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
                             ),
                           ),
                           child: Card(
@@ -311,8 +326,23 @@ class ContactsPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            Navigator.pushReplacementNamed(context, GalleryPage.routeName),
+        onPressed: () => Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+            transitionDuration: const Duration(milliseconds: 500),
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const GalleryPage(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              final tween =
+                  Tween(begin: const Offset(0.5, 0), end: Offset.zero);
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            },
+          ),
+        ),
         backgroundColor: AppColors.cardColor,
         child: const Icon(Icons.image),
       ),

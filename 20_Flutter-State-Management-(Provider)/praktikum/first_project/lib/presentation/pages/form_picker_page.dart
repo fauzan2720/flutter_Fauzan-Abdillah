@@ -17,24 +17,21 @@ import 'package:provider/provider.dart';
 class FormPickerPage extends StatelessWidget {
   static const routeName = 'form_picker_page';
 
-  final ContactModel? contact;
+  final ContactModel contact;
 
   const FormPickerPage({
     super.key,
-    this.contact,
+    required this.contact,
   });
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as FormPickerPage;
+    final ContactProvider contactProvider = context.read<ContactProvider>();
 
-    final ContactProvider contactProvider =
-        Provider.of<ContactProvider>(context, listen: false);
-
-    DateTime pickedDate = args.contact!.pickedDate ?? DateTime.now();
-    TimeOfDay pickedTime = args.contact!.pickedTime ?? TimeOfDay.now();
-    Color pickedColor = args.contact!.pickedColor ?? Colors.green;
-    File? selectedFile = args.contact!.selectedFile;
+    DateTime pickedDate = contact.pickedDate ?? DateTime.now();
+    TimeOfDay pickedTime = contact.pickedTime ?? TimeOfDay.now();
+    Color pickedColor = contact.pickedColor ?? Colors.green;
+    File? selectedFile = contact.selectedFile;
 
     return Scaffold(
       appBar: AppBar(
@@ -129,9 +126,9 @@ class FormPickerPage extends StatelessWidget {
                   onPressed: () {
                     contactProvider.addContact(
                       ContactModel(
-                        id: args.contact!.id,
-                        name: args.contact!.name,
-                        phoneNumber: args.contact!.phoneNumber,
+                        id: contact.id,
+                        name: contact.name,
+                        phoneNumber: contact.phoneNumber,
                         pickedDate: pickedDate,
                         pickedTime: pickedTime,
                         pickedColor: pickedColor,

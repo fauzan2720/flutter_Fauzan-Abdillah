@@ -106,8 +106,23 @@ class GalleryPage extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () =>
-            Navigator.pushReplacementNamed(context, ContactsPage.routeName),
+        onPressed: () => Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+            transitionDuration: const Duration(milliseconds: 500),
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                const ContactsPage(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              final tween =
+                  Tween(begin: const Offset(-0.5, 0), end: Offset.zero);
+              return SlideTransition(
+                position: animation.drive(tween),
+                child: child,
+              );
+            },
+          ),
+        ),
         backgroundColor: AppColors.cardColor,
         child: const Icon(Icons.contact_page),
       ),

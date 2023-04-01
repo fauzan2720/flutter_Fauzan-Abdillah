@@ -1,6 +1,5 @@
 import 'package:first_project/core/colors.dart';
 import 'package:first_project/presentation/pages/contacts_page.dart';
-import 'package:first_project/presentation/pages/form_picker_page.dart';
 import 'package:first_project/presentation/pages/gallery_page.dart';
 import 'package:first_project/presentation/pages/preview_image_page.dart';
 import 'package:first_project/presentation/providers/contact_provider.dart';
@@ -35,7 +34,7 @@ class MyMaterialApp extends StatelessWidget {
         initialRoute: ContactsPage.routeName,
         routes: {
           ContactsPage.routeName: (context) => const ContactsPage(),
-          FormPickerPage.routeName: (context) => const FormPickerPage(),
+          // FormPickerPage.routeName: (context) => const FormPickerPage(),
           GalleryPage.routeName: (context) => const GalleryPage(),
           PreviewImagePage.routeName: (context) => const PreviewImagePage(),
         },

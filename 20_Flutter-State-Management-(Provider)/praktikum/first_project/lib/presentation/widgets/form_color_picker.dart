@@ -1,3 +1,4 @@
+import 'package:first_project/core/extensions/double_ext.dart';
 import 'package:first_project/core/widgets/form_button.dart';
 import 'package:flutter/material.dart';
 
@@ -19,9 +20,7 @@ class FormColorPicker extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(
-              height: 16.0,
-            ),
+            16.0.height,
             Container(
               height: 100.0,
               width: MediaQuery.of(context).size.width,
