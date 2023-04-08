@@ -14,7 +14,7 @@ class ApiService {
     );
   }
 
-  Future get(
+  Future<Response> get(
     String path, {
     Map<String, dynamic>? params,
   }) async {
@@ -24,7 +24,7 @@ class ApiService {
     );
   }
 
-  Future post(
+  Future<Response> post(
     String path, {
     required Map<String, dynamic> data,
     Map<String, dynamic>? params,
@@ -36,7 +36,7 @@ class ApiService {
     );
   }
 
-  Future put(
+  Future<Response> put(
     String path, {
     required Map<String, dynamic> data,
     Map<String, dynamic>? params,
@@ -48,7 +48,7 @@ class ApiService {
     );
   }
 
-  Future delete(String path) async {
+  Future<Response> delete(String path) async {
     return await _dio.delete(path);
   }
 }
