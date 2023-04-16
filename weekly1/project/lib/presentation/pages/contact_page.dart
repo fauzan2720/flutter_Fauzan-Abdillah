@@ -32,12 +32,20 @@ class ContactPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.network(
+                "https://image.cermati.com/q_70,w_1200,h_800,c_fit/riqyfydm76gjfqojwuzz",
+                width: MediaQuery.of(context).size.width,
+                height: 200.0,
+                fit: BoxFit.cover,
+              ),
               30.0.height,
-              const Text(
-                "Contact Us",
-                style: TextStyle(
-                  fontSize: 32.0,
-                  fontWeight: FontWeightExt.medium,
+              const Center(
+                child: Text(
+                  "Contact Us",
+                  style: TextStyle(
+                    fontSize: 32.0,
+                    fontWeight: FontWeightExt.medium,
+                  ),
                 ),
               ),
               20.0.height,
@@ -98,38 +106,41 @@ class ContactPage extends StatelessWidget {
                 },
               ),
               10.0.height,
-              FozFormButton(
-                label: "Submit",
-                onPressed: () async {
-                  if (formKey.currentState!.validate()) {
-                    await showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text("Terimakasih"),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                                "Nama : ${firstNameController.text} ${lastNameController.text}"),
-                            Text("Email : ${emailController.text}"),
-                            Text("Pesan : ${messageController.text}"),
+              Align(
+                alignment: AlignmentDirectional.centerEnd,
+                child: FozFormButton(
+                  label: "Submit",
+                  onPressed: () async {
+                    if (formKey.currentState!.validate()) {
+                      await showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text("Terimakasih"),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                  "Nama : ${firstNameController.text} ${lastNameController.text}"),
+                              Text("Email : ${emailController.text}"),
+                              Text("Pesan : ${messageController.text}"),
+                            ],
+                          ),
+                          actions: [
+                            FozFormButton(
+                              label: "Oke",
+                              onPressed: () => Navigator.pop(context),
+                            ),
                           ],
                         ),
-                        actions: [
-                          FozFormButton(
-                            label: "Oke",
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                        ],
-                      ),
-                    );
-                    firstNameController.clear();
-                    lastNameController.clear();
-                    emailController.clear();
-                    messageController.clear();
-                  }
-                },
+                      );
+                      firstNameController.clear();
+                      lastNameController.clear();
+                      emailController.clear();
+                      messageController.clear();
+                    }
+                  },
+                ),
               ),
               30.0.height,
             ],
